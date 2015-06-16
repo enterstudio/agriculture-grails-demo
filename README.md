@@ -7,11 +7,12 @@ To see it live, visit:
 [http://grails-ag.mybluemix.net](http://grails-ag.mybluemix.net)
 
 #### Self-deploy installation instructions
-1. Add your flowthings.io account name and master token to the following file:
+Add your flowthings.io account name and master token to the following file:
 ```
 grails-app/controllers/flowthings/grails/demo/AgricultureController.groovy
 ```
-2. Run the application:
+
+Run the application:
 ```sh
 grails run-app
 ```
