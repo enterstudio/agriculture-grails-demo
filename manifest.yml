@@ -1,0 +1,14 @@
+declared-services:
+  flowthings:
+    label: flowthings
+    plan: free
+applications:
+- disk_quota: 1024M
+  host: grails-ag
+  name: grails-ag
+  path: .
+  domain: mybluemix.net
+  instances: 1
+  memory: 1024M
+  services:
+  - flowthings
