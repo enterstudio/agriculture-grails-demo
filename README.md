@@ -54,7 +54,7 @@ cf logs grails-ag
 Go to the bluemix dashboard, then navigate to the route given
 
 ### Summary
-The flowthings.io Grails Smart-Agriculture demo demonstrates flowthings.io realtime event processing to create a smart hydration system for crops based on soil moisture, ambient temperature, and weather forecasts.
+The flowthings.io Grails Smart-Agriculture demo demonstrates [flowthings.io](flowthings.io) realtime event processing to create a smart hydration system for crops based on soil moisture, ambient temperature, and weather forecasts.
 
 The demo has been built using:
 
@@ -124,7 +124,7 @@ def inputFlow = new Flow.Builder().setPath(inputPath).get()
 def outputFlow = new Flow.Builder().setPath(outputPath).get()
 ```
 
-We then issue a `Flow Create` request to the API. The response object will be the full Flow object (including attributes such as `id`, `creationDate` and `capacity`). Every flowthings.io object has an `id`, and it is important for making future requests.
+We then issue a [Flow Create](https://flowthings.io/docs/http-flow-create) request to the API. The response object will be the full Flow object (including attributes such as `id`, `creationDate` and `capacity`). Every flowthings.io object has an `id`, and it is important for making future requests.
 
 ```groovy
 baseFlow = api.send(flow().create(baseFlow))
@@ -207,9 +207,13 @@ def websocketApi = new WebsocketApi(credentials);
 moisture = Math.max(0, moisture - 5);
 
 // Send
-def drop = new Drop.Builder().setFhash("soilMoisture").addElem("reading",moisture).get()
+def drop = new Drop.Builder()
+    .setFhash("soilMoisture")
+    .addElem("reading",moisture)
+    .get()
 
-Future<Response<Drop>> response = websocketApi.send(drop(inputFlow.getId()).create(drop))
+Future<Response<Drop>> response = 
+    websocketApi.send(drop(inputFlow.getId()).create(drop))
 ```
 
 The WebSocket API works almost in a similar way to the REST API, except that all requests return a `Future<Response<T>>`. This is because a WebSocket is naturally asynchronous as opposed to request/response.
@@ -220,11 +224,13 @@ We want to receive commands from the output Flow as soon as they are available. 
 ```groovy
 websocketApi.send(drop(outputFlow.getId()).subscribe({ 
     Drop drop ->
-      if ("waterOn".equals(drop.getFhash()) && drop.getElems().get("command")){
+      if ("waterOn".equals(drop.getFhash()) 
+            && drop.getElems().get("command")){
+
         // The crop shall be watered
         moisture = 50;
       }
-    }));
+}));
 ```
 
 The code above shows how we pass a callback to the subscribe command. This will be executed whenever a new Drop is received.
