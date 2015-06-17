@@ -17,6 +17,11 @@ Run the application:
 grails run-app
 ```
 
+Navigate to:
+```
+http://localhost:8080/flowthings-grails-demo
+```
+
 #### IBM Bluemix installation instructions
 
 *Note:* You may need to increase the app memory limit to 1GB if deployment failures occur

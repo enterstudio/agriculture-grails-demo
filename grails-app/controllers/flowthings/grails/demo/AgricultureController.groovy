@@ -211,12 +211,16 @@ class MoistureSimulator extends Simulator {
 	
 	@Override
 	public void run() {
-		// Decrease moisture
-		moisture = Math.max(0, moisture - 5);
-		
-		// Send
-		println "Sending Moisture: ${moisture}"
-		websocketApi.send(drop(inputFlow.getId()).create(moistureData())).get()
+		try {
+			// Decrease moisture
+			moisture = Math.max(0, moisture - 5);
+			
+			// Send
+			println "Sending Moisture: ${moisture}"
+			websocketApi.send(drop(inputFlow.getId()).create(moistureData())).get()
+		} catch (Exception e) {
+			e.printStackTrace()
+		}
 	}
 	
 	def moistureData() {
@@ -238,13 +242,17 @@ class TemperatureSimulator extends Simulator {
 	
 	@Override
 	public void run() {
-		// Vary temperature
-		temperature = temperature + random.nextInt(10) - 5 
-		temperature = Math.max(30, Math.min(temperature, 80));
-		
-		// Send
-		println "Sending Temperature: ${temperature}"
-		websocketApi.send(drop(inputFlow.getId()).create(temperatureData())).get()
+		try {
+			// Vary temperature
+			temperature = temperature + random.nextInt(10) - 5 
+			temperature = Math.max(30, Math.min(temperature, 80));
+			
+			// Send
+			println "Sending Temperature: ${temperature}"
+			websocketApi.send(drop(inputFlow.getId()).create(temperatureData())).get()
+		} catch (Exception e) {
+			e.printStackTrace()
+		}
 	}
 	
 	def temperatureData() {
@@ -266,13 +274,17 @@ class RainForecastSimulator extends Simulator {
 	
 	@Override
 	public void run() {
-		// Flip rain forecast (20% chance of doing so)?
-		def shouldFlip = random.nextInt(100) > 80;
-		rainForecasted = rainForecasted ^ shouldFlip
-		
-		// Send
-		println "Sending Rain Forecasted: ${rainForecasted}"
-		websocketApi.send(drop(inputFlow.getId()).create(forecastData())).get()
+		try {
+			// Flip rain forecast (20% chance of doing so)?
+			def shouldFlip = random.nextInt(100) > 80;
+			rainForecasted = rainForecasted ^ shouldFlip
+			
+			// Send
+			println "Sending Rain Forecasted: ${rainForecasted}"
+			websocketApi.send(drop(inputFlow.getId()).create(forecastData())).get()
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	def forecastData() {
