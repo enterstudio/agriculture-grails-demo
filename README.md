@@ -95,15 +95,16 @@ On load, the controller checks to see if we've already created the Flow and Trac
 ```groovy
 import static com.flowthings.client.api.Flowthings.*
 
-...
+// ...
 def basePath = "/$account/agriculture"
 def inputPath = "/$account/agriculture/inputs"
 def outputPath = "/$account/agriculture/commands"
-...
+// ...
 
-api.send(flow().find(new QueryOptions().filter("path==\"${inputPath}\""))).each { flow ->
-    inputFlow = flow;
-    println "Got Input Flow : ${inputFlow.getId()}"
+api.send(flow().find(new QueryOptions().filter("path==\"${inputPath}\""))).each { 
+    flow ->
+        inputFlow = flow;
+        println "Got Input Flow : ${inputFlow.getId()}"
 }
 
 if (inputFlow == null){
@@ -170,10 +171,10 @@ def js = """
 """
 
 def commandTrack = new Track.Builder()
-          .setSource(inputPath)
-          .setDestination(outputPath)
-          .setJs(js)
-          .get()
+    .setSource(inputPath)
+    .setDestination(outputPath)
+    .setJs(js)
+    .get()
 
 api.send(track().create(commandTrack))
 ```
