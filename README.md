@@ -54,7 +54,7 @@ cf logs grails-ag
 Go to the bluemix dashboard, then navigate to the route given
 
 ### Summary
-The flowthings.io Grails Smart-Agriculture demo demonstrates [flowthings.io](flowthings.io) realtime event processing to create a smart hydration system for crops based on soil moisture, ambient temperature, and weather forecasts.
+The flowthings.io Grails Smart-Agriculture demo demonstrates using [flowthings.io](flowthings.io) realtime event processing to create a smart hydration system for crops based on soil moisture, ambient temperature, and weather forecasts.
 
 The demo has been built using:
 
