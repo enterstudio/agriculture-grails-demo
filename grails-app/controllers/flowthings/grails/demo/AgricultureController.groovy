@@ -28,7 +28,7 @@ class AgricultureController {
   /**
    * Set up to use the flowthings.io REST api.
    */
-  def creds = Credentials.fromBluemixOrDefault(new Credentials("<your flowthingsio account name>", "<your master token>"))
+  def creds = Credentials.fromBluemixOrDefault(new Credentials("<your flowthings.io account name>", "<your master token>"))
   def api = new RestApi(creds)
 
   def account = creds.account
